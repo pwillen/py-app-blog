@@ -1,0 +1,14 @@
+.brand-icon {
+    width: 36px;
+    height: 36px;
+    margin-right: 0.55rem;
+    color: var(--purple-brand);
+}
+
+.brand-purple {
+    color: var(--purple-brand);
+}
+
+.brand-static {
+    color: var(--yellow-brand);
+}

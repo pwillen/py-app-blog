@@ -1,3 +1,8 @@
+header{
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+}
+
 .navbar-container {
     min-height: 72px;
     display: flex;

@@ -1,0 +1,22 @@
+:root {
+    --bg: #0f0a17;
+    --panel: #171027;
+
+    --text: #f2eefe;
+    --muted: #c3b9dd;
+
+    --purple-brand: #9b7bc9;
+    --purple-brand-hover: #b389ff;
+    --yellow-brand: #f2d35e;
+    --yellow-brand-hover: #ffe68a;
+
+    --accent: #b389ff;
+    --border: #2f2349;
+
+    --content-width: 1100px;
+    --reading-width: 750px;
+}
+
+* {
+    box-sizing: border-box;
+}
