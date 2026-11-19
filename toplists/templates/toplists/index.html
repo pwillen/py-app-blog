@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Top 20{% endblock %}
+
+{% block content %}
+    <h1>Top 20</h1>
+    <p>
+        A curated list of my top 20 movies and albums.
+    </p>
+    <ul>
+        <li><a href="{% url 'toplists:movies' %}">Top 20 Movies</a></li>
+        <li><a href="{% url 'toplists:albums' %}">Top 20 Albums</a></li>
+    </ul>
+{% endblock %}
