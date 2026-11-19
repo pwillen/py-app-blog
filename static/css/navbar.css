@@ -1,0 +1,47 @@
+.navbar-container {
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text);
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+}
+
+.navbar-brand:hover .brand-purple {
+    color: var(--purple-brand-hover);
+}
+
+.navbar-brand:hover .brand-static {
+    color: var(--yellow-brand-hover);
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbar-link {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+    color: var(--accent);
+}
+
+.navbar-link-disabled {
+    color: var(--muted);
+    opacity: 0.8;
+}
