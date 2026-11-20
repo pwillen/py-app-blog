@@ -1,0 +1,113 @@
+.hero{
+    padding: 1rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+    display: inline-block;
+    margin: 0 0 0.5rem;
+    padding: 0.4rem 0.75rem;
+
+    color: var(--yellow-brand);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.hero-title {
+    margin: 0.5rem 0 0;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.05em;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.05em;
+}
+
+.identity-persona {
+    color: var(--purple-brand);
+    font-weight: 800;
+}
+
+.identity-separator {
+    color: var(--muted);
+    font-weight: 400;
+}
+
+.identity-domain {
+    color: var(--yellow-brand);
+    font-size: 0.75em;
+    font-weight: 600;
+}
+
+.hero-description {
+    max-width: 600px;
+    font-size: 1.15rem;
+}
+
+.hero-tagline {
+    margin-top: 1.5rem;
+    color: var(--yellow-brand);
+    font-style: italic;
+}
+
+.explore-section {
+    padding: 2.5rem 0;
+}
+
+.explore-section h2 {
+    margin: 0 0 1.25rem;
+    color: var(--text);
+    font-size: 1.2rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.explore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.explore-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    min-height: 220px;
+
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    color: var(--text);
+    text-decoration: none;
+
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.explore-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.explore-card h3 {
+    margin: 0.75rem 0 0.25rem;
+    font-size: 1.4rem;
+}
+
+.explore-card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.card-link {
+    margin-top: auto;
+    padding-top: 1rem;
+    color: var(--yellow-brand);
+    font-size: 0.9rem;
+}

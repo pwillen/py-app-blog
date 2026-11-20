@@ -1,20 +1,56 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Home | Purple Static{% endblock %}
+{% block title %}Purple Static | Home{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+{% endblock %}
 
 {% block content %}
-    <h1>Purple Static</h1>
-    <p class="persona">R4-D-17</p>
-    <p>
-        A quiet home for creative and development expressions.
-        Thoughtful code, personal taste, and experiments in form.
-    </p>
-    <h2>Coming soon</h2>
-    <ul>
-        <li>Top 20 moves</li>
-        <li>Top 20 albums</li>
-        <li>Movie evaluations</li>
-        <li>Approach to the Gang of Four design principles</li>
-        <li>Art and visual experiments</li>
-    </ul>
+
+    <section class="hero">
+        <p class="eyebrow">while curious: explore(); create()</p>
+
+        <h1 class="hero-title">
+            <span class="identity-persona">R4-D-17</span>
+            <span class="identity-separator">@</span>
+            <span class="identity-domain">PurpleStatic</span>
+        </h1>
+
+        <p class="hero-description">
+            An unfiltered, creative expression of myself, driven by a constant need to ask why, learn more, and find ways to express what I discover.
+        </p>
+
+        <p class="hero-tagline">
+            Curiosity is not a malfunction.
+        </p>
+    </section>
+
+    <section class="explore-section">
+        <h2 class="section-title">Explore</h2>
+
+        <div class="explore-grid">
+            <a class="explore-card" href="{% url 'toplists:movies' %}">
+                <span class="card-category">01 / TOP 20</span>
+                <h3>Movies</h3>
+                <p>My Top 20 Movies</p>
+                <span class="card-link">Explore movies →</span>
+            </a>
+
+            <a class="explore-card" href="{% url 'toplists:albums' %}">
+                <span class="card-category">02 / TOP 20</span>
+                <h3>Albums</h3>
+                <p>My Top 20 Albums</p>
+                <span class="card-link">Explore albums →</span>
+            </a>
+
+            <a class="explore-card" href="{% url 'rankings:index' %}">
+                <span class="card-category">03 / RANKINGS</span>
+                <h3>Movies</h3>
+                <p>Ranking watched movies</p>
+                <span class="card-link">Explore rankings →</span>
+            </a>
+        </div>
+    </section>
 {% endblock %}
