@@ -33,29 +33,41 @@
         <div class="explore-grid">
             <a class="explore-card" href="{% url 'toplists:movies' %}">
                 <span class="card-category">01 / TOP 20</span>
-                <h3>Movies</h3>
+                <h3>
+                    {% include "includes/icons/movie.html" %}
+                    <span>Movies</span>
+                </h3>
                 <p>My Top 20 Movies</p>
                 <span class="card-link">Explore movies →</span>
             </a>
 
             <a class="explore-card" href="{% url 'toplists:albums' %}">
                 <span class="card-category">02 / TOP 20</span>
-                <h3>Albums</h3>
+                <h3>
+                    {% include "includes/icons/album.html" %}
+                    <span>Albums</span>
+                </h3>
                 <p>My Top 20 Albums</p>
                 <span class="card-link">Explore albums →</span>
             </a>
 
             <a class="explore-card" href="{% url 'rankings:index' %}">
                 <span class="card-category">03 / RANKINGS</span>
-                <h3>Movies</h3>
+                <h3>
+                    {% include "includes/icons/popcorn.html" %}
+                    <span>Movie Rankings</span>
+                </h3>
                 <p>Ranking watched movies</p>
                 <span class="card-link">Explore rankings →</span>
             </a>
 
             <a class="explore-card" href="{% url 'about:index' %}">
                 <span class="card-category">04 / ABOUT</span>
-                <h3>About</h3>
-                <p>Learn more about Purple Static</p>
+                <h3>
+                    {% include "includes/icons/about.html" %}
+                    <span>About</span>
+                </h3>
+                <p>About R4-D-17</p>
                 <span class="card-link">Explore about →</span>
             </a>
         </div>

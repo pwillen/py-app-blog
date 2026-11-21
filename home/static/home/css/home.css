@@ -96,13 +96,24 @@
 }
 
 .explore-card h3 {
-    margin: 0.75rem 0 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0 0.5rem;
     font-size: 1.4rem;
 }
 
 .explore-card p {
     color: var(--muted);
     font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.explore-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    color: var(--purple-brand);
 }
 
 .card-link {
