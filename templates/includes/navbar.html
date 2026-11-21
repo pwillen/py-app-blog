@@ -24,6 +24,6 @@
         <a class="navbar-link {% if request.resolver_match.app_name == 'toplists' %}active{% endif %}" href="{% url 'toplists:index' %}">Top 20</a>
         <a class="navbar-link {% if request.resolver_match.app_name == 'rankings' %}active{% endif %}" href="{% url 'rankings:index' %}">Rankings</a>
         <span class="navbar-link-disabled">Blog</span>
-        <span class="navbar-link-disabled">About</span>
+        <a class="navbar-link {% if request.resolver_match.app_name == 'about' %}active{% endif %}" href="{% url 'about:index' %}">About</a>
     </nav>
 </div>
