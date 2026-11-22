@@ -21,9 +21,27 @@
 
     <nav class="navbar-links" aria-label="Primary">
         <a class="navbar-link {% if request.resolver_match.app_name == 'home' %}active{% endif %}" href="{% url 'home:index' %}">Home</a>
-        <a class="navbar-link {% if request.resolver_match.app_name == 'toplists' %}active{% endif %}" href="{% url 'toplists:index' %}">Top 20</a>
+        <div class="navbar-dropdown">
+            <div class="navbar-dropdown-trigger">
+                <a class="navbar-link {% if request.resolver_match.app_name == 'toplists' %}active{% endif %}" href="{% url 'toplists:index' %}">
+                    Top 20
+                </a>
+
+                <button class="dropdown-toggle"
+                        type="button"
+                        aria-label="Toggle Top 20 menu"
+                        aria-expanded="false">
+                    <span class="dropdown-arrow"></span>
+                </button>
+            </div>
+
+            <div class="dropdown-menu">
+                <a href="{% url 'toplists:movies' %}">Movies</a>
+                <a href="{% url 'toplists:albums' %}">Albums</a>
+            </div>
+        </div>
         <a class="navbar-link {% if request.resolver_match.app_name == 'rankings' %}active{% endif %}" href="{% url 'rankings:index' %}">Rankings</a>
-        <span class="navbar-link-disabled">Blog</span>
         <a class="navbar-link {% if request.resolver_match.app_name == 'about' %}active{% endif %}" href="{% url 'about:index' %}">About</a>
+        <span class="navbar-link-disabled">Web Development</span>
     </nav>
 </div>
