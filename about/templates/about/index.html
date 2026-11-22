@@ -3,6 +3,10 @@
 
 {% block title %}Purple Static | About{% endblock %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'about/css/about.css' %}">
+{% endblock %}
+
 {% block content %}
     <section class="about-intro">
         <h1>About</h1>
@@ -47,9 +51,13 @@
             pieces come together to form something greater.
         </p>
 
-        <p>Why does this work the way it does? What makes it resonate with me? How can someone else experience the same
-            thing so differently? What ideas, influences, and circumstances shaped it into what it is today?
-        </p>
+        <blockquote>
+            <p>
+                Why does this work the way it does? What makes it resonate with me?
+                How can someone else experience the same thing so differently?
+                What ideas, influences, and circumstances shaped it into what it is today?
+            </p>
+        </blockquote>
 
         <p>I'm drawn to understanding the inner workings of things: the systems, relationships, and decisions that make
             an entity function as a whole. Whether it's the construction of an album, the visual language of a film, the
