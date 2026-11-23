@@ -1,22 +1,29 @@
+from datetime import date
+
 import httpx
 
 from django.conf import settings
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, Field, field_validator
 
 
-class TMDBMovie(BaseModel):
-    model_config = ConfigDict(extra="ignore")
-
+class TMDBMovie(BaseModel, extra="ignore"):
     id: int
     title: str
-    release_date: str | None = None
+    release_year: int | None = Field(default=None, validation_alias="release_date")
     poster_path: str | None = None
     overview: str | None = None
 
+    @field_validator("release_year", mode="before")
+    @classmethod
+    def extract_release_year(cls, value: str | None) -> int | None:
+        if not value:
+            return None
 
-class TMDBSearchResponse(BaseModel):
-    model_config = ConfigDict(extra="ignore")
+        return date.fromisoformat(value).year
 
+
+
+class TMDBSearchResponse(BaseModel, extra="ignore"):
     page: int
     results: list[TMDBMovie]
     total_pages: int
