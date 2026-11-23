@@ -1,0 +1,86 @@
+
+.toplist-intro {
+    max-width: 800px;
+    padding: 1rem 0 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.toplist-intro h1 {
+    margin: 0 0 1rem;
+    font-size: 2.5rem;
+    color: var(--purple-brand);
+}
+
+.toplist-intro p {
+    font-size: 1.05rem;
+}
+
+.movie-list {
+    max-width: 1000px;
+}
+
+.movie-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.movie-rank {
+    min-width: 2.5rem;
+    padding-top: 0.25rem;
+    color: var(--yellow-brand);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.movie-poster {
+    flex-shrink: 0;
+    width: 110px;
+}
+
+.movie-poster img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.35rem;
+}
+
+.movie-group-poster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.movie-group-poster img {
+    width: calc(50% - 0.125rem);
+}
+
+.movie-details {
+    flex: 1;
+}
+
+.movie-details h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.35rem;
+}
+
+.movie-year {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.movie-details p {
+    margin: 0.75rem 0;
+    line-height: 1.7;
+}
+
+.movie-details a {
+    color: var(--yellow-brand);
+    text-decoration: none;
+}
+
+.movie-details a:hover {
+    text-decoration: underline;
+}
