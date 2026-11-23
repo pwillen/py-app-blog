@@ -58,7 +58,7 @@ class MovieGrouping(models.Model):
         return ", ".join(str(movie) for movie in self.movies.all())
 
 class TopListEntry(models.Model):
-    rank = models.PositiveSmallIntegerField()
+    rank = models.PositiveSmallIntegerField(unique=True)
     notes = models.TextField(blank=True)
 
     movie = models.ForeignKey(
