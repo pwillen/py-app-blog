@@ -1,0 +1,46 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<h1>Search TMDB</h1>
+
+<form method="get">
+    <input
+        type="search"
+        name="q"
+        value="{{ query }}"
+        placeholder="Search movies..."
+        required
+    >
+    <button type="submit">Search</button>
+</form>
+
+{% if results %}
+    <hr>
+
+    {% for movie in results %}
+        <div style="display: flex; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid #ccc;">
+
+            {% if movie.poster_path %}
+                <img
+                    src="https://image.tmdb.org/t/p/w185{{ movie.poster_path }}"
+                    alt="{{ movie.title }} poster"
+                    width="92"
+                >
+            {% endif %}
+
+            <div>
+                <h2>{{ movie.title }}</h2>
+                <p>{{ movie.release_date|default:"Release date unknown" }}</p>
+                <p>{{ movie.overview|truncatewords:30 }}</p>
+                <p>TMDB ID: {{ movie.id }}</p>
+            </div>
+
+        </div>
+    {% endfor %}
+
+{% elif query %}
+    <p>No movies found.</p>
+{% endif %}
+
+{% endblock %}
