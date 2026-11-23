@@ -4,10 +4,10 @@
 
 <h1>Search TMDB</h1>
 
-<form method="get">
+<form method="get" action="{% url 'admin:toplists_movie_tmdb_search' %}">
     <input
         type="search"
-        name="q"
+        name="movie_query"
         value="{{ query }}"
         placeholder="Search movies..."
         required
@@ -17,7 +17,6 @@
 
 {% if results %}
     <hr>
-
     {% for movie in results %}
         <div style="display: flex; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid #ccc;">
 
@@ -31,14 +30,18 @@
 
             <div>
                 <h2>{{ movie.title }}</h2>
-                <p>{{ movie.release_date|default:"Release date unknown" }}</p>
+                <p>{{ movie.release_year|default:"Release date unknown" }}</p>
                 <p>{{ movie.overview|truncatewords:30 }}</p>
                 <p>TMDB ID: {{ movie.id }}</p>
             </div>
 
+            <form method="post" action="{% url 'admin:toplists_movie_tmdb_import' %}">
+                {% csrf_token %}
+                <input type="hidden" name="tmdb_id" value="{{ movie.id }}">
+                <button type="submit">Import Movie</button>
+            </form>
         </div>
     {% endfor %}
-
 {% elif query %}
     <p>No movies found.</p>
 {% endif %}
