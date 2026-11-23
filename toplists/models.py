@@ -9,6 +9,11 @@ class Movie(models.Model):
     release_year = models.PositiveSmallIntegerField()
     # https://docs.djangoproject.com/en/6.1/ref/models/fields/#null
     poster_path = models.CharField(max_length=255, blank=True)
+    tmdb_id = models.PositiveBigIntegerField(
+        unique=True,
+        null=True,
+        blank=True,
+    )
 
 
     def __str__(self):
