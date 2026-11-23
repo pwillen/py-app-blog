@@ -8,6 +8,7 @@
     margin: 0 0 1.25rem;
     font-size: clamp(2.5rem, 5vw, 3.25rem);
     letter-spacing: -0.04em;
+    color: var(--purple-brand);
 }
 
 .about-intro p {
@@ -20,11 +21,11 @@
     max-width: 650px;
     font-size: 1.2rem;
     line-height: 1.6;
-    color: var(--yellow-brand);
 }
 
 .about-intro p:last-of-type {
     font-style: italic;
+    color: var(--muted);
 }
 
 .about-section {
@@ -35,8 +36,7 @@
 .about-section h2 {
     padding-bottom: 0.65rem;
     margin: 0 0 1.25rem;
-    border-bottom: 1px solid var(--border);
-    color: var(--purple-brand);
+    border-bottom: 1px solid var(--yellow-brand);
     font-size: 1.5rem;
     letter-spacing: -0.025em;
 }
