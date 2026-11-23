@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 from pathlib import Path
+from PurpleStatic.config import app_settings, PROJECT_ROOT
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# Make PROJECT ROOT an alias for BASE_DIR
+BASE_DIR = PROJECT_ROOT
 
 
 # Quick-start development settings - unsuitable for production
@@ -129,3 +131,6 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+# External API keys
+TMDB_API_READ_ACCESS_TOKEN = app_settings.tmdb_read_only_access_token.get_secret_value()
