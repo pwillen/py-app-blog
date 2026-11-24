@@ -8,78 +8,87 @@
 {% endblock %}
 
 {% block content %}
-    <section class="toplist-intro">
-        <h1>Top 20 Movies</h1>
-        <p>A curated collection of films that have left an impression on me.</p>
-    </section>
+    <div class="toplist-page">
+        <section class="toplist-intro">
+            <h1>Top 20 Movies</h1>
+            <p>A curated collection of films that have left an impression on me.</p>
+        </section>
 
-    <section class="movie-list">
-        {% for entry in entries %}
-            <article class="movie-entry">
-                <span class="movie-rank">
-                    {{ entry.rank|stringformat:"02d" }}
-                </span>
+        <section class="movie-list">
+            <div class="movie-progress">
+                <span class="current-rank">01</span>
+                <span class="progress-divider">/</span>
+                <span class="total-rank">{{ entries|length|stringformat:"02d" }}</span>
+            </div>
+            {% for entry in entries %}
+                <article class="movie-slide" data-rank="{{ entry.rank }}">
+                    <span class="movie-rank">
+                        {{ entry.rank|stringformat:"02d" }}
+                    </span>
 
-                {% if entry.movie %}
-                    <div class="movie-poster">
-                        {% if entry.movie.poster_path %}
-                            <img
-                                src="https://image.tmdb.org/t/p/w342{{ entry.movie.poster_path }}"
-                                alt="{{ entry.movie.title }} poster"
-                            >
-                        {% endif %}
-                    </div>
-
-                    <div class="movie-details">
-                        <h2>{{ entry.movie.title }}</h2>
-                        <span class="movie-year">
-                            {{ entry.movie.release_year }}
-                        </span>
-
-                        {% if entry.notes %}
-                            <p>{{ entry.notes }}</p>
-                        {% endif %}
-
-                        <a href="{{ entry.movie.personal_ranking_url }}"
-                           target="_blank"
-                           rel="noopener noreferrer">
-                            View personal ranking
-                        </a>
-                    </div>
-
-                {% elif entry.grouping %}
-                    <div class="movie-poster movie-group-poster">
-                        {% for movie in entry.grouping.movies.all|slice:":3" %}
-                            {% if movie.poster_path %}
+                    {% if entry.movie %}
+                        <div class="movie-poster">
+                            {% if entry.movie.poster_path %}
                                 <img
-                                    src="https://image.tmdb.org/t/p/w342{{ movie.poster_path }}"
-                                    alt="{{ movie.title }} poster"
+                                    src="https://image.tmdb.org/t/p/w500{{ entry.movie.poster_path }}"
+                                    alt="{{ entry.movie.title }} poster"
                                 >
                             {% endif %}
-                        {% endfor %}
-                    </div>
+                        </div>
 
-                    <div class="movie-details">
-                        <h2>
-                            {% if entry.grouping.display_name %}
-                                {{ entry.grouping.display_name }}
-                            {% else %}
-                                {{ entry.grouping }}
+                        <div class="movie-details">
+                            <h2>{{ entry.movie.title }}</h2>
+                            <span class="movie-year">
+                                {{ entry.movie.release_year }}
+                            </span>
+
+                            {% if entry.notes %}
+                                <p>{{ entry.notes }}</p>
                             {% endif %}
-                        </h2>
 
-                        <span class="movie-year">
-                            {{ entry.grouping.display_release_years }}
-                        </span>
+                            <a href="{{ entry.movie.personal_ranking_url }}">
+                                View personal ranking
+                            </a>
+                        </div>
 
-                        {% if entry.notes %}
-                            <p>{{ entry.notes }}</p>
-                        {% endif %}
-                    </div>
-                {% endif %}
-            </article>
-        {% empty %}
-            <p>No movies added yet.</p>
-        {% endfor %}
-    </section>
+                    {% elif entry.grouping %}
+                        <div class="movie-poster movie-group-poster">
+                            {% for movie in entry.grouping.movies.all|slice:":3" %}
+                                {% if movie.poster_path %}
+                                    <img
+                                        src="https://image.tmdb.org/t/p/w342{{ movie.poster_path }}"
+                                        alt="{{ movie.title }} poster"
+                                    >
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <div class="movie-details">
+                            <h2>
+                                {% if entry.grouping.display_name %}
+                                    {{ entry.grouping.display_name }}
+                                {% else %}
+                                    {{ entry.grouping }}
+                                {% endif %}
+                            </h2>
+
+                            <span class="movie-year">
+                                {{ entry.grouping.display_release_years }}
+                            </span>
+
+                            {% if entry.notes %}
+                                <p>{{ entry.notes }}</p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                </article>
+            {% empty %}
+                <p>No movies added yet.</p>
+            {% endfor %}
+        </section>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'toplists/js/movies.js' %}" defer></script>
 {% endblock %}
