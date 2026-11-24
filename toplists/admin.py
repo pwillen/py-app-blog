@@ -2,15 +2,22 @@
 Django admin for Movie and Album toplists
 """
 import httpx
-from django.contrib import admin, messages
 from django import forms
+from django.contrib import admin, messages
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.urls import path, reverse, URLPattern
+from django.shortcuts import redirect, render
+from django.urls import URLPattern, path, reverse
 
-from toplists.models import Movie, MovieTopListEntry, MovieGrouping, Album, AlbumTopListEntry
+from toplists.models import (
+    Album,
+    AlbumTopListEntry,
+    Movie,
+    MovieGrouping,
+    MovieTopListEntry,
+)
 from toplists.services.tmdb import TMDBClient
+
 
 # TODO These TMDB form class may get moved to a separate space for usage outside of the admin interface in the future.
 class TMDBSearchForm(forms.Form):

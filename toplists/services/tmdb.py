@@ -1,7 +1,6 @@
 from datetime import date
 
 import httpx
-
 from django.conf import settings
 from pydantic import BaseModel, Field, field_validator
 

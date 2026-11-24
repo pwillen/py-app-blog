@@ -10,8 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
-from pathlib import Path
-from PurpleStatic.config import app_settings, PROJECT_ROOT, postgres_settings
+from PurpleStatic.config import PROJECT_ROOT, app_settings, postgres_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Make PROJECT ROOT an alias for BASE_DIR
