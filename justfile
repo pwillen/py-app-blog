@@ -22,3 +22,12 @@ check:
 # Docker
 up:
     docker-compose up -d
+
+# Linting
+ruff-check:
+    uv run ruff check .
+    uv run format --check .
+
+ruff-fix:
+    uv run ruff check . --fix
+    uv run format .
