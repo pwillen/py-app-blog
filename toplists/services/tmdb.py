@@ -21,7 +21,6 @@ class TMDBMovie(BaseModel, extra="ignore"):
         return date.fromisoformat(value).year
 
 
-
 class TMDBSearchResponse(BaseModel, extra="ignore"):
     page: int
     results: list[TMDBMovie]

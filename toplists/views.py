@@ -5,7 +5,8 @@ from toplists.models import MovieTopListEntry
 
 # Create your views here.
 def index(request):
-    return render(request, 'toplists/index.html')
+    return render(request, "toplists/index.html")
+
 
 def movies(request):
     entries = MovieTopListEntry.objects.select_related(
@@ -21,5 +22,6 @@ def movies(request):
         {"entries": entries},
     )
 
+
 def albums(request):
-    return render(request, 'toplists/albums.html')
+    return render(request, "toplists/albums.html")
