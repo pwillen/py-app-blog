@@ -20,7 +20,8 @@ from toplists.models import (
 from toplists.services.tmdb import TMDBClient
 
 
-# TODO These TMDB form class may get moved to a separate space for usage outside of the admin interface in the future.
+# TODO These TMDB form class may get moved to a separate space for usage outside of the
+#  admin interface in the future.
 class TMDBSearchForm(forms.Form):
     movie_query = forms.CharField(
         max_length=200,
@@ -71,7 +72,8 @@ class MovieAdmin(admin.ModelAdmin):
 
     def tmdb_search_view(self, request: HttpRequest) -> HttpResponse:
         """
-        View for searching movies on TMDB and displaying the results in the admin interface.
+        View for searching movies on TMDB and displaying the results in the admin
+        interface.
         Args:
             request: The movie query request form from the admin interface.
 
@@ -113,7 +115,8 @@ class MovieAdmin(admin.ModelAdmin):
         Args:
             request: The import request form from the admin interface.
 
-        Returns: A redirect to the movie change page or the TMDB search page, depending on the outcome of the import.
+        Returns: A redirect to the movie change page or the TMDB search page, depending
+        on the outcome of the import.
 
         """
         form = TMDBImportForm(request.POST)
@@ -186,7 +189,8 @@ class MovieGroupingAdmin(admin.ModelAdmin):
 @admin.register(MovieTopListEntry)
 class TopListEntryAdmin(admin.ModelAdmin):
     """
-    Admin interface for the MovieTopListEntry model, allowing management of top list entries.
+    Admin interface for the MovieTopListEntry model, allowing management of top list
+    entries.
     """
 
     list_display = (
@@ -207,7 +211,7 @@ class TopListEntryAdmin(admin.ModelAdmin):
     ordering = ("rank",)
 
 
-# ======================================================================================================================
+# ======================================================================================
 
 
 # Album Admin
@@ -225,7 +229,8 @@ class AlbumAdmin(admin.ModelAdmin):
 @admin.register(AlbumTopListEntry)
 class AlbumTopListEntryAdmin(admin.ModelAdmin):
     """
-    Admin interface for the AlbumTopListEntry model, allowing management of top list entries.
+    Admin interface for the AlbumTopListEntry model, allowing management of top list
+    entries.
     """
 
     list_display = (

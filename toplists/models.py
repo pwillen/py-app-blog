@@ -72,7 +72,8 @@ class MovieGrouping(models.Model):
 
 class MovieTopListEntry(models.Model):
     """
-    Represents an entry in a top list, which can be either a single movie or a grouping of movies.
+    Represents an entry in a top list, which can be either a single movie or a grouping
+    of movies.
     """
 
     rank = models.PositiveSmallIntegerField(unique=True)
@@ -109,7 +110,7 @@ class MovieTopListEntry(models.Model):
         return f"#{self.rank} - {entity}"
 
 
-# ======================================================================================================================
+# ======================================================================================
 
 
 # Album Models
