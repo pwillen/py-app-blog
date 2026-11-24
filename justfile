@@ -25,7 +25,7 @@ up:
 
 # Linting
 ruff-check:
-    uv run ruff check .
+    -uv run ruff check .
     uv run ruff format --check .
 
 ruff-fix:
