@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 from pathlib import Path
-from PurpleStatic.config import app_settings, PROJECT_ROOT
+from PurpleStatic.config import app_settings, PROJECT_ROOT, postgres_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # Make PROJECT ROOT an alias for BASE_DIR
@@ -79,9 +79,13 @@ WSGI_APPLICATION = 'PurpleStatic.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": postgres_settings.postgres_db,
+        "USER": postgres_settings.postgres_user,
+        "PASSWORD": postgres_settings.postgres_password.get_secret_value(),
+        "HOST": postgres_settings.db_host,
+        "PORT": postgres_settings.db_port,
     }
 }
 
