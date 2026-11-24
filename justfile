@@ -18,3 +18,7 @@ dbshell:
 
 check:
     uv run python manage.py check
+
+# Docker
+up:
+    docker-compose up -d

@@ -9,3 +9,14 @@ class AppSettings(BaseSettings, env_file=PROJECT_ROOT / ".env", extra="ignore", 
     tmdb_read_only_access_token: SecretStr
 
 app_settings = AppSettings()
+
+class DBSettings(BaseSettings, env_file=PROJECT_ROOT / ".env", extra="ignore", case_sensitive=False):
+    db_host: str = "localhost"
+    db_port: int = 5432
+
+class PostgresSettings(DBSettings):
+    postgres_db: str = "purple_static"
+    postgres_user: str = "postgres"
+    postgres_password: SecretStr
+
+postgres_settings = PostgresSettings()
