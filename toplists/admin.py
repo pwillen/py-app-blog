@@ -1,6 +1,7 @@
 """
 Django admin for Movie and Album toplists
 """
+
 import httpx
 from django import forms
 from django.contrib import admin, messages
@@ -24,13 +25,13 @@ class TMDBSearchForm(forms.Form):
     movie_query = forms.CharField(
         max_length=200,
         strip=True,
-        widget=forms.SearchInput(
-            attrs={"placeholder": "Search movies..."}
-        ),
+        widget=forms.SearchInput(attrs={"placeholder": "Search movies..."}),
     )
+
 
 class TMDBImportForm(forms.Form):
     tmdb_id = forms.IntegerField(min_value=1)
+
 
 # Movie Admin
 @admin.register(Movie)
@@ -38,6 +39,7 @@ class MovieAdmin(admin.ModelAdmin):
     """
     Admin interface for the Movie model, including TMDB search and import functionality.
     """
+
     list_display = ("title", "release_year")
     search_fields = ("title",)
     list_filter = ("release_year",)
@@ -159,14 +161,11 @@ class MovieAdmin(admin.ModelAdmin):
                     f"{movie.title} already existed and was updated.",
                 )
 
-            return redirect(
-                reverse("admin:toplists_movie_change", args=[movie.pk])
-            )
+            return redirect(reverse("admin:toplists_movie_change", args=[movie.pk]))
 
         except (ValueError, httpx.HTTPError) as exc:
             messages.error(request, f"Import failed: {exc}")
             return redirect("admin:toplists_movie_tmdb_search")
-
 
 
 @admin.register(MovieGrouping)
@@ -174,6 +173,7 @@ class MovieGroupingAdmin(admin.ModelAdmin):
     """
     Admin interface for the MovieGrouping model, allowing management of movie groupings.
     """
+
     list_display = ("__str__", "display_release_years")
     search_fields = (
         "display_name",
@@ -188,7 +188,12 @@ class TopListEntryAdmin(admin.ModelAdmin):
     """
     Admin interface for the MovieTopListEntry model, allowing management of top list entries.
     """
-    list_display = ("rank", "movie", "grouping",)
+
+    list_display = (
+        "rank",
+        "movie",
+        "grouping",
+    )
     search_fields = (
         "movie__title",
         "grouping__display_name",
@@ -201,7 +206,9 @@ class TopListEntryAdmin(admin.ModelAdmin):
     )
     ordering = ("rank",)
 
+
 # ======================================================================================================================
+
 
 # Album Admin
 @admin.register(Album)
@@ -209,19 +216,23 @@ class AlbumAdmin(admin.ModelAdmin):
     """
     Admin interface for the Album model, allowing management of albums.
     """
+
     list_display = ("__str__", "release_year")
     search_fields = ("title", "artist")
     list_filter = ("release_year",)
+
 
 @admin.register(AlbumTopListEntry)
 class AlbumTopListEntryAdmin(admin.ModelAdmin):
     """
     Admin interface for the AlbumTopListEntry model, allowing management of top list entries.
     """
-    list_display = ("rank", "album",)
-    search_fields = (
-        "album__title",
+
+    list_display = (
+        "rank",
+        "album",
     )
+    search_fields = ("album__title",)
     list_filter = (
         "rank",
         "album__release_year",

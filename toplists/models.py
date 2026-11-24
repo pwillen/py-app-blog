@@ -1,6 +1,7 @@
 """
 Django models for the Top Lists app.
 """
+
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
@@ -11,6 +12,7 @@ class Movie(models.Model):
     """
     Represents a movie in the database.
     """
+
     title = models.CharField(max_length=200)
     release_year = models.PositiveSmallIntegerField()
     # https://docs.djangoproject.com/en/6.1/ref/models/fields/#null
@@ -21,20 +23,24 @@ class Movie(models.Model):
         blank=True,
     )
 
-
     def __str__(self):
         return self.title
 
     @property
     def personal_ranking_url(self):
-        return reverse("rankings:movie", kwargs={
-            "title": self.title,
-        })
+        return reverse(
+            "rankings:movie",
+            kwargs={
+                "title": self.title,
+            },
+        )
+
 
 class MovieGrouping(models.Model):
     """
     Represents a grouping of movies, such as a series or franchise.
     """
+
     display_name = models.CharField(max_length=200, blank=True)
 
     movies = models.ManyToManyField(
@@ -44,10 +50,7 @@ class MovieGrouping(models.Model):
 
     @property
     def display_release_years(self):
-        years = sorted(
-            movie.release_year
-            for movie in self.movies.all()
-        )
+        years = sorted(movie.release_year for movie in self.movies.all())
 
         if not years:
             return ""
@@ -66,10 +69,12 @@ class MovieGrouping(models.Model):
 
         return ", ".join(str(movie) for movie in self.movies.all())
 
+
 class MovieTopListEntry(models.Model):
     """
     Represents an entry in a top list, which can be either a single movie or a grouping of movies.
     """
+
     rank = models.PositiveSmallIntegerField(unique=True)
     notes = models.TextField(blank=True)
 
@@ -103,13 +108,16 @@ class MovieTopListEntry(models.Model):
         entity = self.movie or self.grouping
         return f"#{self.rank} - {entity}"
 
+
 # ======================================================================================================================
+
 
 # Album Models
 class Album(models.Model):
     """
     Represents a music album in the database.
     """
+
     title = models.CharField(max_length=200)
     artist = models.CharField(max_length=200)
     release_year = models.PositiveSmallIntegerField()
@@ -123,10 +131,12 @@ class Album(models.Model):
     def __str__(self):
         return f"{self.title} by {self.artist}"
 
+
 class AlbumTopListEntry(models.Model):
     """
     Represents an entry in a top list for albums.
     """
+
     rank = models.PositiveSmallIntegerField(unique=True)
 
     album = models.OneToOneField(
