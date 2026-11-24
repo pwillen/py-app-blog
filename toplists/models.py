@@ -1,10 +1,16 @@
+"""
+Django models for the Top Lists app.
+"""
 from django.db import models
 from django.db.models import Q
 from django.urls import reverse
 
 
-# Create your models here.
+# Movie Models
 class Movie(models.Model):
+    """
+    Represents a movie in the database.
+    """
     title = models.CharField(max_length=200)
     release_year = models.PositiveSmallIntegerField()
     # https://docs.djangoproject.com/en/6.1/ref/models/fields/#null
@@ -26,6 +32,9 @@ class Movie(models.Model):
         })
 
 class MovieGrouping(models.Model):
+    """
+    Represents a grouping of movies, such as a series or franchise.
+    """
     display_name = models.CharField(max_length=200, blank=True)
 
     movies = models.ManyToManyField(
@@ -57,18 +66,21 @@ class MovieGrouping(models.Model):
 
         return ", ".join(str(movie) for movie in self.movies.all())
 
-class TopListEntry(models.Model):
+class MovieTopListEntry(models.Model):
+    """
+    Represents an entry in a top list, which can be either a single movie or a grouping of movies.
+    """
     rank = models.PositiveSmallIntegerField(unique=True)
     notes = models.TextField(blank=True)
 
-    movie = models.ForeignKey(
+    movie = models.OneToOneField(
         Movie,
         on_delete=models.CASCADE,
         null=True,
         blank=True,
     )
 
-    grouping = models.ForeignKey(
+    grouping = models.OneToOneField(
         MovieGrouping,
         on_delete=models.CASCADE,
         null=True,
@@ -90,3 +102,36 @@ class TopListEntry(models.Model):
     def __str__(self):
         entity = self.movie or self.grouping
         return f"#{self.rank} - {entity}"
+
+# ======================================================================================================================
+
+# Album Models
+class Album(models.Model):
+    """
+    Represents a music album in the database.
+    """
+    title = models.CharField(max_length=200)
+    artist = models.CharField(max_length=200)
+    release_year = models.PositiveSmallIntegerField()
+    cover_art_path = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return f"{self.title} by {self.artist}"
+
+class AlbumTopListEntry(models.Model):
+    """
+    Represents an entry in a top list for albums.
+    """
+    rank = models.PositiveSmallIntegerField(unique=True)
+
+    album = models.OneToOneField(
+        Album,
+        on_delete=models.CASCADE,
+        related_name="toplist_entry",
+    )
+
+    class Meta:
+        ordering = ["rank"]
+
+    def __str__(self):
+        return f"#{self.rank} - {self.album}"

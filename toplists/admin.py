@@ -1,10 +1,15 @@
+"""
+Django admin for Movie and Album toplists
+"""
 import httpx
 from django.contrib import admin, messages
 from django import forms
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import path, reverse
+from django.urls import path, reverse, URLPattern
 
-from toplists.models import Movie, TopListEntry, MovieGrouping
+from toplists.models import Movie, MovieTopListEntry, MovieGrouping, Album, AlbumTopListEntry
 from toplists.services.tmdb import TMDBClient
 
 # TODO These TMDB form class may get moved to a separate space for usage outside of the admin interface in the future.
@@ -20,9 +25,12 @@ class TMDBSearchForm(forms.Form):
 class TMDBImportForm(forms.Form):
     tmdb_id = forms.IntegerField(min_value=1)
 
-# Register your models here.
+# Movie Admin
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
+    """
+    Admin interface for the Movie model, including TMDB search and import functionality.
+    """
     list_display = ("title", "release_year")
     search_fields = ("title",)
     list_filter = ("release_year",)
@@ -30,7 +38,11 @@ class MovieAdmin(admin.ModelAdmin):
     change_list_template = "admin/toplists/movie/change_list.html"
 
     # Append a custom URL for the TMDB search view to the admin URLs
-    def get_urls(self):
+    def get_urls(self) -> list[URLPattern]:
+        """
+        Returns the custom URLs for the TMDB search and import views.
+        Returns: list of URLPattern objects for the admin interface.
+        """
         urls = super().get_urls()
 
         custom_urls = [
@@ -48,7 +60,15 @@ class MovieAdmin(admin.ModelAdmin):
 
         return custom_urls + urls
 
-    def tmdb_search_view(self, request):
+    def tmdb_search_view(self, request: HttpRequest) -> HttpResponse:
+        """
+        View for searching movies on TMDB and displaying the results in the admin interface.
+        Args:
+            request: The movie query request form from the admin interface.
+
+        Returns: The TMDB search results page
+
+        """
         form = TMDBSearchForm(request.GET or None)
         results = []
 
@@ -78,7 +98,15 @@ class MovieAdmin(admin.ModelAdmin):
             context,
         )
 
-    def tmdb_import_view(self, request):
+    def tmdb_import_view(self, request: HttpRequest) -> HttpResponseRedirect:
+        """
+        View for importing a movie from TMDB into the local database.
+        Args:
+            request: The import request form from the admin interface.
+
+        Returns: A redirect to the movie change page or the TMDB search page, depending on the outcome of the import.
+
+        """
         form = TMDBImportForm(request.POST)
 
         if not form.is_valid():
@@ -136,6 +164,9 @@ class MovieAdmin(admin.ModelAdmin):
 
 @admin.register(MovieGrouping)
 class MovieGroupingAdmin(admin.ModelAdmin):
+    """
+    Admin interface for the MovieGrouping model, allowing management of movie groupings.
+    """
     list_display = ("__str__", "display_release_years")
     search_fields = (
         "display_name",
@@ -145,8 +176,11 @@ class MovieGroupingAdmin(admin.ModelAdmin):
     filter_horizontal = ("movies",)
 
 
-@admin.register(TopListEntry)
+@admin.register(MovieTopListEntry)
 class TopListEntryAdmin(admin.ModelAdmin):
+    """
+    Admin interface for the MovieTopListEntry model, allowing management of top list entries.
+    """
     list_display = ("rank", "movie", "grouping",)
     search_fields = (
         "movie__title",
@@ -157,5 +191,32 @@ class TopListEntryAdmin(admin.ModelAdmin):
         "rank",
         "movie__release_year",
         "grouping__movies__release_year",
+    )
+    ordering = ("rank",)
+
+# ======================================================================================================================
+
+# Album Admin
+@admin.register(Album)
+class AlbumAdmin(admin.ModelAdmin):
+    """
+    Admin interface for the Album model, allowing management of albums.
+    """
+    list_display = ("__str__", "release_year")
+    search_fields = ("title", "artist__name")
+    list_filter = ("release_year", "artist__name")
+
+@admin.register(AlbumTopListEntry)
+class AlbumTopListEntryAdmin(admin.ModelAdmin):
+    """
+    Admin interface for the AlbumTopListEntry model, allowing management of top list entries.
+    """
+    list_display = ("rank", "album",)
+    search_fields = (
+        "album__title",
+    )
+    list_filter = (
+        "rank",
+        "album__release_year",
     )
     ordering = ("rank",)
