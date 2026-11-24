@@ -203,8 +203,8 @@ class AlbumAdmin(admin.ModelAdmin):
     Admin interface for the Album model, allowing management of albums.
     """
     list_display = ("__str__", "release_year")
-    search_fields = ("title", "artist__name")
-    list_filter = ("release_year", "artist__name")
+    search_fields = ("title", "artist")
+    list_filter = ("release_year",)
 
 @admin.register(AlbumTopListEntry)
 class AlbumTopListEntryAdmin(admin.ModelAdmin):

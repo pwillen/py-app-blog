@@ -114,6 +114,11 @@ class Album(models.Model):
     artist = models.CharField(max_length=200)
     release_year = models.PositiveSmallIntegerField()
     cover_art_path = models.CharField(max_length=255, blank=True)
+    musicbrainz_id = models.UUIDField(
+        unique=True,
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         return f"{self.title} by {self.artist}"
