@@ -1,14 +1,131 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Top 20{% endblock %}
+{% block title %}Purple Static | Top 20{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'toplists/css/toplists.css' %}">
+{% endblock %}
 
 {% block content %}
-    <h1>Top 20</h1>
-    <p>
-        A curated list of my top 20 movies and albums.
-    </p>
-    <ul>
-        <li><a href="{% url 'toplists:movies' %}">Top 20 Movies</a></li>
-        <li><a href="{% url 'toplists:albums' %}">Top 20 Albums</a></li>
-    </ul>
+<div class="toplist-page">
+    <section class="toplist-intro">
+        <h1>Top 20</h1>
+        <p>
+            A collection of movies and albums. More than a ranking, these lists are an
+            exploration of personal taste and artistic expression.
+        </p>
+    </section>
+
+    <section class="toplist-links">
+        <a class="toplist-card" href="{% url 'toplists:movies' %}">
+            <div class="toplist-card-art movie-card-art">
+                <div class="collage-artwork">
+                    {% for entry in movie_entries %}
+                        <img
+                            class="collage-art"
+                            src="https://image.tmdb.org/t/p/w500{{ entry.movie.poster_path }}"
+                            alt="{{ entry.movie.title }} poster"
+                        >
+                    {% empty %}
+                        <span>FILM COLLECTION</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="toplist-card-content">
+                <div>
+                    <h2>Top 20 Movies</h2>
+                    <p>A collection of cinematic favorites.</p>
+                </div>
+                <span class="toplist-card-arrow">Explore movies →</span>
+            </div>
+        </a>
+
+        <a class="toplist-card" href="{% url 'toplists:albums' %}">
+            <div class="toplist-card-art album-card-art">
+                <div class="collage-artwork">
+                    {% for entry in album_entries %}
+                        {% if entry.album.cover_art_path %}
+                            <img
+                                class="collage-art"
+                                src="{{ entry.album.cover_art_path }}"
+                                alt="{{ entry.album.title }} album cover"
+                            >
+                        {% endif %}
+                    {% empty %}
+                        <span>MUSIC COLLECTION</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="toplist-card-content">
+                <div>
+                    <h2>Top 20 Albums</h2>
+                    <p>Albums that have left a lasting impression.</p>
+                </div>
+                <span class="toplist-card-arrow">Explore albums →</span>
+            </div>
+        </a>
+    </section>
+
+    <section class="toplist-philosophy">
+        <h2>The Top 20 Philosophy</h2>
+
+        <p>
+            A Top 5 list is restrictive. There's enough room for your
+            favorites, but not much room to explore beyond them.
+            A Top 10 starts to open things up,
+            but it can still become a collection of variations on the
+            same preference rather than a representation of someone's broader taste.
+        </p>
+
+        <p>
+            A Top 20 gives you room to be a little more individual.
+            It makes space for the unexpected favorites, the unusual
+            choices, and the works that might not immediately come
+            to mind when someone asks what you like.
+        </p>
+
+        <p>
+            Think back to when someone asked what kind of music you
+            listened to, and your answer was "all kinds." Maybe you
+            didn't have the language to explain your taste, were
+            embarrassed to share it, or simply hadn't explored
+            yourself enough to understand what you actually liked.
+        </p>
+
+        <p>
+            I see a Top 20 as a way to answer that question more
+            meaningfully. Twenty entries give you enough room to
+            communicate something about yourself — not just what
+            you enjoy, but what makes your taste your own.
+        </p>
+    </section>
+
+    <section class="toplist-philosophy">
+        <h2>Why Albums?</h2>
+
+        <p>
+            I chose albums over individual songs or entire artists
+            because an album is a cohesive piece of work. It's an
+            opportunity to experience an artist's ideas, sound,
+            creativity, and consistency across a complete project.
+        </p>
+
+        <p>
+            A great song can make an impression, but an album can
+            establish an identity. The sequencing, atmosphere,
+            recurring themes, and relationship between tracks all
+            contribute to something greater than any one song.
+        </p>
+
+        <p>
+            I'm more interested in that lasting artistic value than
+            in identifying a collection of hits. An album gives me
+            something substantial to return to and appreciate as a
+            complete work.
+        </p>
+    </section>
+</div>
 {% endblock %}

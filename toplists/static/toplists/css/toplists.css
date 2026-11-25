@@ -1,0 +1,219 @@
+.toplist-page {
+    max-width: 1200px;
+}
+
+.toplist-intro {
+    max-width: 850px;
+    padding: 1rem 0 1.5rem;
+    margin-bottom: 1.5em;
+}
+
+.toplist-intro h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2.75rem, 5vw, 4rem);
+    color: var(--purple-brand);
+}
+
+.toplist-intro p {
+    max-width: 750px;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+.toplist-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin: 1rem 0 3rem;
+}
+
+.toplist-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: var(--panel);
+    color: var(--text);
+    text-decoration: none;
+    transition:
+        border-color 0.35s ease,
+        transform 0.35s ease;
+}
+
+.toplist-card:hover {
+    border-color: var(--purple-brand);
+    transform: translateY(-0.35rem);
+}
+
+.collage-artwork {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.collage-art {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: block;
+    object-fit: cover;
+    border-radius: 0.2rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.45);
+    transition: transform 0.4s ease;
+}
+
+/* Movie posters */
+
+.movie-card-art .collage-art {
+    width: 115px;
+    height: 165px;
+}
+
+.movie-card-art .collage-art:nth-child(1) {
+    z-index: 1;
+    transform: translate(calc(-50% - 156px), -50%) rotate(-18deg);
+}
+
+.movie-card-art .collage-art:nth-child(2) {
+    z-index: 2;
+    transform: translate(calc(-50% - 104px), -50%) rotate(-12deg);
+}
+
+.movie-card-art .collage-art:nth-child(3) {
+    z-index: 3;
+    transform: translate(calc(-50% - 52px), -50%) rotate(-6deg);
+}
+
+.movie-card-art .collage-art:nth-child(4) {
+    z-index: 6;
+    transform: translate(-50%, -50%);
+}
+
+.movie-card-art .collage-art:nth-child(5) {
+    z-index: 3;
+    transform: translate(calc(-50% + 52px), -50%) rotate(6deg);
+}
+
+.movie-card-art .collage-art:nth-child(6) {
+    z-index: 2;
+    transform: translate(calc(-50% + 104px), -50%) rotate(12deg);
+}
+
+.movie-card-art .collage-art:nth-child(7) {
+    z-index: 1;
+    transform: translate(calc(-50% + 156px), -50%) rotate(18deg);
+}
+
+/* Album covers */
+
+.album-card-art .collage-art {
+    width: 125px;
+    height: 125px;
+}
+
+.album-card-art .collage-art:nth-child(1) {
+    z-index: 1;
+    transform: translate(calc(-50% - 156px), -50%) rotate(-15deg);
+}
+
+.album-card-art .collage-art:nth-child(2) {
+    z-index: 2;
+    transform: translate(calc(-50% - 104px), -50%) rotate(-10deg);
+}
+
+.album-card-art .collage-art:nth-child(3) {
+    z-index: 3;
+    transform: translate(calc(-50% - 52px), -50%) rotate(-5deg);
+}
+
+.album-card-art .collage-art:nth-child(4) {
+    z-index: 6;
+    transform: translate(-50%, -50%);
+}
+
+.album-card-art .collage-art:nth-child(5) {
+    z-index: 3;
+    transform: translate(calc(-50% + 52px), -50%) rotate(5deg);
+}
+
+.album-card-art .collage-art:nth-child(6) {
+    z-index: 2;
+    transform: translate(calc(-50% + 104px), -50%) rotate(10deg);
+}
+
+.album-card-art .collage-art:nth-child(7) {
+    z-index: 1;
+    transform: translate(calc(-50% + 156px), -50%) rotate(15deg);
+}
+
+.collage-artwork span {
+    color: var(--muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+}
+
+.toplist-card-art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
+    padding: 1rem;
+    overflow: hidden;
+    background: var(--bg);
+}
+
+.toplist-card-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem;
+}
+
+.toplist-card-content h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.6rem;
+    color: var(--purple-brand);
+}
+
+.toplist-card-content p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.toplist-card-arrow {
+    color: var(--yellow-brand);
+    font-weight: 600;
+    transition: transform 0.3s ease;
+}
+
+.toplist-card:hover .toplist-card-arrow {
+    transform: translateX(0.35rem);
+}
+
+.toplist-philosophy {
+    max-width: 850px;
+    padding: 2rem 0;
+    margin-bottom: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+
+.toplist-philosophy h2 {
+    margin: 0 0 1.5rem;
+    font-size: 1.8rem;
+    color: var(--text);
+}
+
+.toplist-philosophy p {
+    margin: 0 0 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--muted);
+}
