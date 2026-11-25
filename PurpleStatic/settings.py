@@ -136,4 +136,5 @@ MAILERS = {
 }
 
 # External API keys
+API_USER_AGENT = "PurpleStatic/0.1.0 (contact@purple-static.com)"
 TMDB_API_READ_ACCESS_TOKEN = app_settings.tmdb_read_only_access_token.get_secret_value()

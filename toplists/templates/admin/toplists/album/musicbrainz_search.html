@@ -1,0 +1,33 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<h1>Search MusicBrainz</h1>
+
+<form method="get" action="{% url 'admin:toplists_album_musicbrainz_search' %}">
+    {{ form.album_query }}
+    <button type="submit">Search</button>
+</form>
+
+{% if results %}
+    <hr>
+    {% for album in results %}
+        <div style="display: flex; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid #ccc;">
+
+            <div>
+                <h2>{{ album.title }}</h2>
+                <p>{{ album.artist_name }}</p>
+                <p>{{ album.release_year|default:"Release year unknown" }}</p>
+                <p>MusicBrainz ID: {{ album.id }}</p>
+            </div>
+
+            <a href="{% url 'admin:toplists_album_musicbrainz_preview' album.id %}">
+                Preview Album
+            </a>
+        </div>
+    {% endfor %}
+{% elif query %}
+    <p>No albums found.</p>
+{% endif %}
+
+{% endblock %}

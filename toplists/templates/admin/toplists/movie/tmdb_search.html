@@ -5,13 +5,7 @@
 <h1>Search TMDB</h1>
 
 <form method="get" action="{% url 'admin:toplists_movie_tmdb_search' %}">
-    <input
-        type="search"
-        name="movie_query"
-        value="{{ query }}"
-        placeholder="Search movies..."
-        required
-    >
+    {{ form.movie_query }}
     <button type="submit">Search</button>
 </form>
 

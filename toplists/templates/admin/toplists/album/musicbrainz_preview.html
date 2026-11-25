@@ -1,0 +1,45 @@
+
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+
+<h1>Preview Album</h1>
+
+<div style="display: flex; gap: 2rem; padding: 1rem 0;">
+
+    {% if cover_art_url %}
+        <div>
+            <img
+                src="{{ cover_art_url }}"
+                alt="{{ album.title }} cover art"
+                style="width: 250px; height: auto;"
+            >
+        </div>
+    {% endif %}
+
+    <div>
+        <h2>{{ album.title }}</h2>
+        <p><strong>Artist:</strong> {{ album.artist_name }}</p>
+        <p>
+            <strong>Release Year:</strong>
+            {{ album.release_year|default:"Unknown" }}
+        </p>
+        <p><strong>MusicBrainz ID:</strong> {{ album.id }}</p>
+    </div>
+
+</div>
+
+<form method="post" action="{% url 'admin:toplists_album_musicbrainz_import' %}">
+    {% csrf_token %}
+    <input
+        type="hidden"
+        name="musicbrainz_id"
+        value="{{ album.id }}"
+    >
+    <button type="submit">Import Album</button>
+    <a href="{% url 'admin:toplists_album_musicbrainz_search' %}">
+        Back to Search
+    </a>
+</form>
+
+{% endblock %}

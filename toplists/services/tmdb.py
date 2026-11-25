@@ -41,6 +41,7 @@ class TMDBClient:
             base_url=self.BASE_URL,
             headers={
                 "Authorization": f"Bearer {token}",
+                "User-Agent": settings.API_USER_AGENT,
                 "Accept": "application/json",
             },
             timeout=10,
