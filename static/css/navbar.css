@@ -53,6 +53,7 @@ header{
 
 .navbar-dropdown {
     position: relative;
+    margin-right: -0.5rem;
 }
 
 .navbar-dropdown-trigger {
