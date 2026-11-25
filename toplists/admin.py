@@ -253,13 +253,18 @@ class MusicBrainzImportForm(forms.Form):
 class AlbumAdmin(admin.ModelAdmin):
     """
     Admin interface for the Album model, allowing management of albums.
+
+    NOTE Album Admin needs a separate preview view because the album data is in a
+    separate API
     """
 
     list_display = ("__str__", "release_year")
     search_fields = ("title", "artist")
     list_filter = ("release_year",)
+    ordering = ("title",)
+    change_list_template = "admin/toplists/album/change_list.html"
 
-    # Append a custom URL for the TMDB search view to the admin URLs
+    # Append a custom URL for the MusicBrainz search view to the admin URLs
     def get_urls(self) -> list[URLPattern]:
         """
         Returns the custom URLs for the MusicBrainz search and import views.
@@ -350,6 +355,16 @@ class AlbumAdmin(admin.ModelAdmin):
             messages.error(request, f"Album preview failed: {exc}")
             return redirect("admin:toplists_album_musicbrainz_search")
 
+        preview_data = {
+            "musicbrainz_id": album_data.id,
+            "title": album_data.title,
+            "artist": album_data.artist_name,
+            "release_year": album_data.release_year,
+            "cover_art_path": cover_art_url or "",
+        }
+
+        request.session[f"musicbrainz_preview_{musicbrainz_id}"] = preview_data
+
         context = {
             **self.admin_site.each_context(request),
             "opts": self.model._meta,
@@ -382,52 +397,58 @@ class AlbumAdmin(admin.ModelAdmin):
 
         musicbrainz_id = form.cleaned_data["musicbrainz_id"]
 
-        try:
-            with MusicBrainzClient() as musicbrainz:
-                album_data = musicbrainz.get_release_group(str(musicbrainz_id))
-                cover_art_url = musicbrainz.get_cover_art_url(str(musicbrainz_id))
+        session_key = f"musicbrainz_preview_{musicbrainz_id}"
+        preview_data = request.session.pop(session_key, None)
 
-            album_defaults = {
-                "title": album_data.title,
-                "artist": album_data.artist_name,
-                "musicbrainz_id": album_data.id,
-                "cover_art_path": cover_art_url or "",
-            }
+        if preview_data is None:
+            try:
+                with MusicBrainzClient() as musicbrainz:
+                    album_data = musicbrainz.get_release_group(str(musicbrainz_id))
+                    cover_art_url = musicbrainz.get_cover_art_url(str(musicbrainz_id))
 
-            if album_data.release_year is None:
-                messages.warning(
-                    request,
-                    f"{album_data.title} needs a release year before importing.",
-                )
-
-                return redirect(
-                    f"{reverse('admin:toplists_album_add')}?{urlencode(album_defaults)}"
-                )
-
-            album, created = Album.objects.update_or_create(
-                musicbrainz_id=album_data.id,
-                defaults={
-                    **album_defaults,
+                album_defaults = {
+                    "musicbrainz_id": album_data.id,
+                    "title": album_data.title,
+                    "artist": album_data.artist_name,
                     "release_year": album_data.release_year,
-                },
+                    "cover_art_path": cover_art_url or "",
+                }
+
+            except httpx.HTTPError as exc:
+                messages.error(request, f"Album import failed: {exc}")
+                return redirect("admin:toplists_album_musicbrainz_search")
+        else:
+            album_defaults = preview_data
+
+        if album_defaults["release_year"] is None:
+            messages.warning(
+                request,
+                f"{album_defaults['title']} needs a release year before importing.",
             )
 
-            if created:
-                messages.success(
-                    request,
-                    f"{album.title} imported successfully.",
-                )
-            else:
-                messages.success(
-                    request,
-                    f"{album.title} already existed and was updated.",
-                )
+            return redirect(
+                f"{reverse('admin:toplists_album_add')}?{urlencode(album_defaults)}"
+            )
 
-            return redirect(reverse("admin:toplists_album_change", args=[album.pk]))
+        album, created = Album.objects.update_or_create(
+            musicbrainz_id=album_defaults["musicbrainz_id"],
+            defaults={
+                **album_defaults,
+            },
+        )
 
-        except (ValueError, httpx.HTTPError) as exc:
-            messages.error(request, f"Import failed: {exc}")
-            return redirect("admin:toplists_album_musicbrainz_search")
+        if created:
+            messages.success(
+                request,
+                f"{album.title} imported successfully.",
+            )
+        else:
+            messages.success(
+                request,
+                f"{album.title} already existed and was updated.",
+            )
+
+        return redirect(reverse("admin:toplists_album_change", args=[album.pk]))
 
 
 @admin.register(AlbumTopListEntry)
