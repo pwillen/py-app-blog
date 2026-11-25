@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from toplists.models import MovieTopListEntry, AlbumTopListEntry
+from toplists.models import AlbumTopListEntry, MovieTopListEntry
 
 
 # Create your views here.
