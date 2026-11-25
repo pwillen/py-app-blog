@@ -1,33 +1,60 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Top 20{% endblock %}
+{% block title %}Purple Static | Top 20 Albums{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'toplists/css/albums.css' %}">
+{% endblock %}
 
 {% block content %}
-    <h1>Top 20</h1>
-    <p>
-        A curated list of my top 20 albums.
-    </p>
-    <ol>
-        <!-- put the list below in li tags -->
-        <li>Loveless (1991) - My Bloody Valentine</li>
-        <li>Discovery (2001) - Daft Punk</li>
-        <li>Pinkerton (1996) - Weezer</li>
-        <li>Disintegration (1989) - The Cure</li>
-        <li>Wish You Were Here (1975) - Pink Floyd</li>
-        <li>Atavista (2024) - Donald Glover</li>
-        <li>Swimming (2018) - Mac Miller</li>
-        <li>2001 (1999) - Dr. Dre</li>
-        <li>Pretty Hate Machine (1989) - Nine Inch Nails</li>
-        <li>Somewhere in Time (1986) - Iron Maiden</li>
-        <li>Imaginal Disk (2024) - Magdalena Bay</li>
-        <li>Violater (1990) (With B Side Singles) - Depeche Mode</li>
-        <li>This is Why (2023) - Paramore</li>
-        <li>Jackpot Juicer (2022) - Dance Gavin Dance</li>
-        <li>The 20/20 Experience (2013) - Justin Timberlake</li>
-        <li>Rumours (1977) - Fleetwood Mac</li>
-        <li>The Question (2005) - Emery</li>
-        <li>Songs for the Deaf (2002) - Queens of the Stone Age</li>
-        <li>Either/Or (1997) - Elliott Smith</li>
-        <li>Selected Ambient Works 85-92 (1992) - Aphex Twin</li>
-    </ol>
+    <div class="toplist-page">
+        <section class="toplist-intro">
+            <h1>Top 20 Albums</h1>
+            <p>A collection of albums that have left a lasting impression on me.</p>
+        </section>
+
+        <section class="album-list">
+            <div class="album-progress">
+                <span class="current-rank">01</span>
+                <span class="progress-divider">/</span>
+                <span class="total-rank">{{ entries|length|stringformat:"02d" }}</span>
+            </div>
+
+            {% for entry in entries %}
+                <article class="album-slide" data-rank="{{ entry.rank }}">
+                    <span class="album-rank">
+                        {{ entry.rank|stringformat:"02d" }}
+                    </span>
+
+                    <div class="album-cover">
+                        {% if entry.album.cover_art_path %}
+                            <img
+                                src="{{ entry.album.cover_art_path }}"
+                                alt="{{ entry.album.title }} album cover"
+                            >
+                        {% endif %}
+                    </div>
+
+                    <div class="album-details">
+                        <h2>{{ entry.album.title }}</h2>
+
+                        <p class="album-artist">
+                            {{ entry.album.artist }}
+                        </p>
+
+                        <span class="album-year">
+                            {{ entry.album.release_year }}
+                        </span>
+                    </div>
+                </article>
+            {% empty %}
+                <p>No albums added yet.</p>
+            {% endfor %}
+        </section>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'toplists/js/albums.js' %}" defer></script>
 {% endblock %}

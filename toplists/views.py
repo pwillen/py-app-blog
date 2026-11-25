@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from toplists.models import MovieTopListEntry
+from toplists.models import MovieTopListEntry, AlbumTopListEntry
 
 
 # Create your views here.
@@ -24,4 +24,10 @@ def movies(request):
 
 
 def albums(request):
-    return render(request, "toplists/albums.html")
+    entries = AlbumTopListEntry.objects.select_related("album")
+
+    return render(
+        request,
+        "toplists/albums.html",
+        {"entries": entries},
+    )
