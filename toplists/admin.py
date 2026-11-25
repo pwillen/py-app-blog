@@ -1,6 +1,7 @@
 """
 Django admin for Movie and Album toplists
 """
+
 from urllib.parse import urlencode
 from uuid import UUID
 
@@ -19,8 +20,8 @@ from toplists.models import (
     MovieGrouping,
     MovieTopListEntry,
 )
-from toplists.services.tmdb import TMDBClient
 from toplists.services.musicbrainz import MusicBrainzClient
+from toplists.services.tmdb import TMDBClient
 
 
 # TODO These TMDB form class may get moved to a separate space for usage outside of the
@@ -29,6 +30,7 @@ class TMDBSearchForm(forms.Form):
     """
     Form for searching movies on TMDB.
     """
+
     movie_query = forms.CharField(
         max_length=200,
         strip=True,
@@ -40,6 +42,7 @@ class TMDBImportForm(forms.Form):
     """
     Form for importing a movie from TMDB.
     """
+
     tmdb_id = forms.IntegerField(min_value=1)
 
 
@@ -224,20 +227,26 @@ class TopListEntryAdmin(admin.ModelAdmin):
 
 # ======================================================================================
 
+
 class MusicBrainzSearchForm(forms.Form):
     """
     Form for searching albums on MusicBrainz.
     """
+
     album_query = forms.CharField(
         max_length=200,
         strip=True,
-        widget=forms.SearchInput(attrs={"placeholder": "Search albums..."}),)
+        widget=forms.SearchInput(attrs={"placeholder": "Search albums..."}),
+    )
+
 
 class MusicBrainzImportForm(forms.Form):
     """
     Form for importing an album from MusicBrainz.
     """
+
     musicbrainz_id = forms.UUIDField()
+
 
 # Album Admin
 @admin.register(Album)
@@ -318,9 +327,9 @@ class AlbumAdmin(admin.ModelAdmin):
         )
 
     def musicbrainz_preview_view(
-            self,
-            request: HttpRequest,
-            musicbrainz_id: UUID,
+        self,
+        request: HttpRequest,
+        musicbrainz_id: UUID,
     ) -> HttpResponse:
         """
         View for previewing an album from MusicBrainz before importing it.
@@ -361,8 +370,8 @@ class AlbumAdmin(admin.ModelAdmin):
         Args:
             request: The import request form from the admin interface.
 
-        Returns: A redirect to the album change page or the MusicBrainz search page, depending
-        on the outcome of the import.
+        Returns: A redirect to the album change page or the MusicBrainz search page,
+        depending on the outcome of the import.
 
         """
         form = MusicBrainzImportForm(request.POST)

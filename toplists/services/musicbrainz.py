@@ -75,6 +75,7 @@ class MusicBrainzClient:
     """
     Client for interacting with the MusicBrainz API.
     """
+
     BASE_URL = "https://musicbrainz.org/ws/2"
 
     def __init__(self):
@@ -112,8 +113,8 @@ class MusicBrainzClient:
         return MusicBrainzSearchResponse.model_validate(response.json())
 
     def get_release_group(
-            self,
-            release_group_id: str,
+        self,
+        release_group_id: str,
     ) -> MusicBrainzReleaseGroup:
         """
         Retrieve a release group by its MusicBrainz ID.
@@ -137,7 +138,8 @@ class MusicBrainzClient:
         Retrieve the 500px front cover URL for a release group.
         """
 
-        # Use httpx.get instead of self.client.get to avoid the base URL being prepended.
+        # Use httpx.get instead of self.client.get to avoid the base URL being
+        # prepended.
         response = httpx.get(
             f"https://coverartarchive.org/release-group/{release_group_id}",
             headers={
@@ -145,7 +147,7 @@ class MusicBrainzClient:
                 "Accept": "application/json",
             },
             timeout=10,
-            follow_redirects=True
+            follow_redirects=True,
         )
 
         if response.status_code == 404:
