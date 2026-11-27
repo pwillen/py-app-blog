@@ -9,14 +9,24 @@
 
 {% block content %}
     <section class="about-intro">
-        <h1>About</h1>
-        <p>I'm Preston. though online you'll usually find me as R4-D-17.</p>
+        <div class="about-intro-text">
+            <h1>About</h1>
+            <p>I'm Preston. though online you'll usually find me as R4-D-17.</p>
 
-        <p>It took me a while to recognize it, but I'm an artist of sorts. Not necessarily in the traditional sense,
-            and certainly not someone who has everything figured out. Somewhere along the way, between school, pursuing
-            a STEM career, and settling into the daily 9-to-5 grind, I lost touch with that part of myself.</p>
+            <p>It took me a while to recognize it, but I'm an artist of sorts. Not necessarily in the traditional sense,
+                and certainly not someone who has everything figured out. Somewhere along the way, between school, pursuing
+                a STEM career, and settling into the daily 9-to-5 grind, I lost touch with that part of myself.</p>
 
-        <p>Purple Static is one small step toward getting it back.</p>
+            <p>Purple Static is one small step toward getting it back.</p>
+        </div>
+
+        <div class="about-avatar-frame">
+            <img
+                src="{% static 'about/images/about-avatar.png' %}"
+                alt="Illustrated portrait of R4-D-17"
+                class="about-avatar"
+            >
+        </div>
     </section>
 
     <section class="about-section">
