@@ -42,6 +42,6 @@
         </div>
         <a class="navbar-link {% if request.resolver_match.app_name == 'rankings' %}active{% endif %}" href="{% url 'rankings:index' %}">Rankings</a>
         <a class="navbar-link {% if request.resolver_match.app_name == 'about' %}active{% endif %}" href="{% url 'about:index' %}">About</a>
-        <span class="navbar-link-disabled">Web Development</span>
+        <a class="navbar-link {% if request.resolver_match.app_name == 'contact' %}active{% endif %}" href="{% url 'contact:index' %}">Contact</a>
     </nav>
 </div>

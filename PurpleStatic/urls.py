@@ -23,5 +23,6 @@ urlpatterns = [
     path("toplists/", include("toplists.urls")),
     path("rankings/", include("rankings.urls")),
     path("about/", include("about.urls")),
+    path("contact/", include("contact.urls")),
     path("admin/", admin.site.urls),
 ]

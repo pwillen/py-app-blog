@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "toplists",
     "rankings",
     "about",
+    "contact",
 ]
 
 MIDDLEWARE = [
