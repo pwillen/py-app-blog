@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Acknowledgements | Purple Static{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'home/css/acknowledgements.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="acknowledgements-page">
+    <div class="acknowledgements-intro">
+        <h1>Acknowledgements</h1>
+        <p>
+            Purple Static makes use of external databases and services
+            to provide media information and artwork. This project
+            would not be possible without the work of the communities
+            and organizations behind them.
+        </p>
+    </div>
+
+    <section class="acknowledgement">
+        <h2>The Movie Database (TMDB)</h2>
+
+        <div class="acknowledgement-content">
+            <a href="https://www.themoviedb.org/"
+               target="_blank"
+               rel="noopener noreferrer">
+                <img
+                    class="tmdb-logo"
+                    src="{% static 'home/images/tmdb-logo.svg' %}"
+                    alt="The Movie Database (TMDB)"
+                >
+            </a>
+
+            <p>
+                Movie metadata and poster artwork are provided by
+                <a href="https://www.themoviedb.org/" target="_blank"
+                   rel="noopener noreferrer">The Movie Database</a>.
+            </p>
+
+            <p class="tmdb-notice">
+                This product uses the TMDB API but is not endorsed
+                or certified by TMDB.
+            </p>
+
+            <a href="https://www.themoviedb.org/about/logos-attribution"
+               target="_blank" rel="noopener noreferrer">
+                TMDB logos and attribution guidelines
+            </a>
+        </div>
+    </section>
+
+    <section class="acknowledgement">
+        <h2>MusicBrainz</h2>
+
+        <div class="acknowledgement-content">
+            <p>
+                Album metadata is provided by
+                <a href="https://musicbrainz.org/" target="_blank"
+                   rel="noopener noreferrer">MusicBrainz</a>,
+                an open music encyclopedia maintained by a community
+                of contributors.
+            </p>
+
+            <p>
+                Album artwork is provided by the
+                <a href="https://coverartarchive.org/" target="_blank"
+                   rel="noopener noreferrer">Cover Art Archive</a>,
+                a collaboration between MusicBrainz and the
+                Internet Archive.
+            </p>
+
+            <p class="acknowledgement-note">
+                Album artwork remains the property of its respective
+                copyright holders.
+            </p>
+        </div>
+    </section>
+</section>
+{% endblock %}

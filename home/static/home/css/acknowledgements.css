@@ -1,0 +1,68 @@
+
+.acknowledgements-page {
+    max-width: 1000px;
+}
+
+.acknowledgements-intro {
+    max-width: 850px;
+    padding: 1rem 0 2rem;
+}
+
+.acknowledgements-intro h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(2.75rem, 5vw, 4rem);
+    color: var(--purple-brand);
+}
+
+.acknowledgements-intro p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+.acknowledgement {
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--border);
+}
+
+.acknowledgement h2 {
+    margin: 0 0 1rem;
+    font-size: 1.6rem;
+    color: var(--text);
+}
+
+.acknowledgement-content {
+    max-width: 750px;
+}
+
+.acknowledgement-content p {
+    margin: 0 0 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+.acknowledgement-content a {
+    color: var(--purple-brand-hover);
+    text-decoration: none;
+}
+
+.acknowledgement-content a:hover {
+    text-decoration: underline;
+}
+
+.tmdb-logo {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.tmdb-notice {
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--purple-brand);
+    background: var(--panel);
+}
+
+.acknowledgement-note {
+    font-size: 0.9rem;
+}
