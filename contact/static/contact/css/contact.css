@@ -1,0 +1,49 @@
+.contact-development {
+    padding: 1rem 0 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-general {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    margin-bottom: 2.5rem;
+    border-top: 1px solid var(--border);
+}
+
+.contact-development,
+.contact-general {
+    max-width: 900px;
+}
+
+.contact-development h1,
+.contact-general h2 {
+    color: var(--purple-brand);
+    letter-spacing: -0.03em;
+}
+
+.contact-development h1 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(2.75rem, 5vw, 3.5rem);
+}
+
+.contact-general h2 {
+    margin: 0 0 1rem;
+    font-size: 2rem;
+}
+
+
+.contact-development a,
+.contact-general a {
+    color: var(--yellow-brand);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-development a:hover,
+.contact-general a:hover {
+    text-decoration: underline;
+}
+
+.contact-prompt {
+    margin-top: 1.75rem;
+}

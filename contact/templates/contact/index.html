@@ -1,55 +1,52 @@
-
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Contact | Purple Static{% endblock %}
+{% block title %}Purple Static | Contact{% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'contact/css/contact.css' %}">
 {% endblock %}
 
 {% block content %}
-    <section class="contact-page">
-        <div class="contact-development">
-            <h1>Web Development</h1>
+    <section class="contact-development">
+        <h1>Web Development</h1>
 
-            <p>
-                If you're a local small business in the greater Kannapolis area
-                and are interested in improving your online presence, I'd be
-                interested in helping you grow it through my software
-                development skills.
-            </p>
+        <p>
+            If you're a local small business in the greater Kannapolis area
+            and are interested in improving your online presence, I'd be
+            interested in helping you grow it through my software
+            development skills.
+        </p>
 
-            <p>
-                This would be something new for me to grow into, so I'm looking
-                for a little trust and grace as I figure things out. But that
-                goes both ways. :)
-            </p>
+        <p>
+            This would be something new for me to grow into, so I'm looking
+            for a little trust and grace as I figure things out. But that
+            goes both ways. :)
+        </p>
 
-            <p class="contact-prompt">
-                If that sounds like you, reach out to me at
-                <a href="mailto:development@purple-static.com">
-                    development@purple-static.com
-                </a>
-            </p>
-        </div>
+        <p class="contact-prompt">
+            If that sounds like you, reach out to me at
+            <a href="mailto:development@purple-static.com">
+                development@purple-static.com
+            </a>
+        </p>
+    </section>
 
-        <div class="contact-general">
-            <h2>Something Else?</h2>
+    <section class="contact-general">
+        <h2>Something Else?</h2>
 
-            <p>
-                If you'd like to get in contact with me about anything else,
-                whether it's to share your appreciation of the site, submit
-                your own Top 20 list, or discuss some of the philosophies
-                behind Purple Static, I'd love to hear from you.
-            </p>
+        <p>
+            If you'd like to get in contact with me about anything else,
+            whether it's to share your appreciation of the site, submit
+            your own Top 20 list, or discuss some of the philosophies
+            behind Purple Static, I'd love to hear from you.
+        </p>
 
-            <p class="contact-prompt">
-                Reach out to me at
-                <a href="mailto:contact@purple-static.com">
-                    contact@purple-static.com
-                </a>
-            </p>
-        </div>
+        <p class="contact-prompt">
+            Reach out to me at
+            <a href="mailto:contact@purple-static.com">
+                contact@purple-static.com
+            </a>
+        </p>
     </section>
 {% endblock %}
