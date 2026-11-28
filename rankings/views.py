@@ -1,10 +1,35 @@
-from django.shortcuts import render
+"""
 
+"""
+from django.shortcuts import render, get_object_or_404
 
-# Create your views here.
+from toplists.models import Movie
+
 def index(request):
-    return render(request, "rankings/index.html")
+    movies = (
+        Movie.objects
+        .filter(watches__isnull=False)
+        .distinct()
+        .order_by("title", "release_year")
+    )
+
+    return render(
+        request,
+        "rankings/index.html",
+        {"movies": movies},
+    )
 
 
-def movie(request, title):
-    return "Movie page for: " + title
+def movie(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+
+    watches = movie.watches.all()
+
+    return render(
+        request,
+        "rankings/movie.html",
+        {
+            "movie": movie,
+            "watches": watches,
+        },
+    )

@@ -1,0 +1,33 @@
+.rankings-page {
+    max-width: 1200px;
+}
+
+.rankings-intro {
+    margin-bottom: 2rem;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.5rem;
+}
+
+.movie-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.movie-card img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+.movie-card h2 {
+    margin: 0.75rem 0 0.25rem;
+}
+
+.movie-card p {
+    margin: 0;
+}

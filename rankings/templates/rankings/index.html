@@ -1,4 +1,42 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block title %}Purple Static | Movie Archive{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'rankings/css/rankings.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="rankings-page">
+    <section class="rankings-intro">
+        <h1>Movie Archive</h1>
+        <p>
+            An Archive of watched movies
+        </p>
+    </section>
+
+    <section class="movie-grid">
+        {% for movie in movies %}
+            <a
+                href="{% url 'rankings:movie' movie.pk %}"
+                class="movie-card"
+            >
+                {% if movie.poster_path %}
+                    <img
+                        src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
+                        alt="{{ movie.title }} poster"
+                    >
+                {% endif %}
+                <h2>{{ movie.title }}</h2>
+                <p>{{ movie.release_year }}</p>
+            </a>
+        {% empty %}
+            <p>No movies in the archive yet.</p>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}{% extends "base.html" %}
 
 {% block title %}Movie Rankings{% endblock %}
 
