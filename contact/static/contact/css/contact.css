@@ -1,3 +1,7 @@
+.contact-page {
+    max-width: 900px;
+}
+
 .contact-development {
     padding: 1rem 0 1.5rem;
     margin-bottom: 1.5rem;
@@ -8,11 +12,6 @@
     padding-top: 2rem;
     margin-bottom: 2.5rem;
     border-top: 1px solid var(--border);
-}
-
-.contact-development,
-.contact-general {
-    max-width: 900px;
 }
 
 .contact-development h1,
